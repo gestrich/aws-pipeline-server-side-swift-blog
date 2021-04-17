@@ -17,6 +17,12 @@ function updateStack {
 }
 
 function deleteStack {
+  aws s3 rm s3://$(aws cloudformation describe-stacks --stack-name $STACK_NAME --query "Stacks[0].Outputs[?OutputKey=='S3ArtifactBucket'].OutputValue" --output text)/ --recursive
+  IMAGES_TO_DELETE=$(aws ecr list-images --repository-name codebuild/swift --query 'imageIds[*]' --output json)
+  aws ecr batch-delete-image --repository-name codebuild/swift --image-ids "$IMAGES_TO_DELETE"
+  IMAGES_TO_DELETE=$(aws ecr list-images --repository-name swift-app --query 'imageIds[*]' --output json)
+  aws ecr batch-delete-image --repository-name swift-app --image-ids "$IMAGES_TO_DELETE"
+
   aws cloudformation delete-stack --stack-name $STACK_NAME
   aws cloudformation wait stack-delete-complete --stack-name $STACK_NAME
 }
