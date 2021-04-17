@@ -16,7 +16,6 @@ function quickSetup {
   echo "run ./tools updateStack"
 }
 
-echo "git remote set-url origin <copied url>"
 function createStack {
   CF_BUCKET=org.gestrich.codebuild ./scripts/create-stack.sh
   aws cloudformation wait stack-create-complete --stack-name $STACK_NAME 
