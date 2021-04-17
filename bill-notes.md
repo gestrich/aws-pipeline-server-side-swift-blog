@@ -14,7 +14,7 @@ pipeline.yml
       	EC2LoadBalancer
       	EC2LBListener
       	Ec2LbUrl
-
+        Seems possible the items under WebAppLaunchTemplate can be removed.
 On step "Pushing the Swift application code"
   IAM -> Users -> Bill -> Security Credentials
   Already had "HTTPS Git credentials for AWS CodeCommit"
