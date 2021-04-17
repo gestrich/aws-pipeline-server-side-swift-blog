@@ -5,13 +5,15 @@ STACK_NAME="swift-build"
 
 function createStack {
   CF_BUCKET=org.gestrich.codebuild ./scripts/create-stack.sh
-  #aws cloudformation create-stack --cli-input-json file://create-stack.json --template-body file://./simple.yml
   aws cloudformation wait stack-create-complete --stack-name $STACK_NAME 
+  #aws cloudformation create-stack --cli-input-json file://create-stack.json --template-body file://./simple.yml
 }
 
 function updateStack {
-  aws cloudformation update-stack --cli-input-json file://create-stack.json --template-body file://./simple.yml
-  aws cloudformation wait stack-update-complete --stack-name $STACK_NAME  
+  CF_BUCKET=org.gestrich.codebuild ./scripts/update-stack.sh
+  aws cloudformation wait stack-update-complete --stack-name $STACK_NAME 
+  #aws cloudformation update-stack --cli-input-json file://create-stack.json --template-body file://./simple.yml
+  #aws cloudformation wait stack-update-complete --stack-name $STACK_NAME  
 }
 
 function deleteStack {
