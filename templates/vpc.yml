@@ -343,5 +343,3 @@ Outputs:
     Value: !Ref WebAppPrivateSubnetB
   VPC:
     Value: !Ref WebAppVPC
-  Ec2LbUrl:
-    Value: !Sub "http://${EC2LoadBalancer.DNSName}/"

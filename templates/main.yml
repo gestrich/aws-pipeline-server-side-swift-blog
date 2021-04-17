@@ -74,8 +74,6 @@ Resources:
 Outputs:
   EcsLbUrl:
     Value: !GetAtt ECS.Outputs.EcsLbUrl
-  Ec2LbUrl:
-    Value: !GetAtt VPC.Outputs.Ec2LbUrl
   S3ArtifactBucket:
     Value: !GetAtt Pipeline.Outputs.ArtifactStoreS3Location
   AppImage:

@@ -128,21 +128,6 @@ Resources:
           Name: Build 
           Actions: 
             - 
-              Name: BuildBinaryAction 
-              InputArtifacts: 
-                -
-                  Name: SourceOutput 
-              OutputArtifacts: 
-                -
-                  Name: BinaryOutput 
-              ActionTypeId: 
-                Category: Build 
-                Owner: AWS 
-                Version: 1 
-                Provider: CodeBuild
-              Configuration: 
-                ProjectName: !Ref CodeBuildProject
-            - 
               Name: BuildContainerAction 
               InputArtifacts: 
                 -
@@ -160,21 +145,6 @@ Resources:
         - 
           Name: Release 
           Actions: 
-            - 
-              Name: EC2ReleaseAction
-              InputArtifacts: 
-                - 
-                  Name: BinaryOutput 
-              ActionTypeId: 
-                Category: Deploy 
-                Owner: AWS 
-                Version: 1
-                Provider: CodeDeploy 
-              Configuration: 
-                ApplicationName: 
-                  Ref: EC2Application
-                DeploymentGroupName: !Ref EC2DeploymentGroup
-              RunOrder: 1
             - 
               Name: ECSReleaseAction
               InputArtifacts: 
@@ -339,9 +309,6 @@ Resources:
                   - !GetAtt ArtifactStoreS3Location.Arn
                   - !Sub "${ArtifactStoreS3Location.Arn}/*"
 
-  EC2Application:
-    Type: AWS::CodeDeploy::Application
-
   ECSApplication:
     Type: AWS::CodeDeploy::Application
     Properties:
@@ -377,19 +344,6 @@ Resources:
                 - 'ec2:CreateTags'
                 Effect: Allow
                 Resource: '*'
-
-  EC2DeploymentGroup:
-    Type: AWS::CodeDeploy::DeploymentGroup
-    Properties:
-      ApplicationName: !Ref EC2Application
-      DeploymentGroupName: !Sub "${AWS::StackName}-ec2-deployment-group"
-      ServiceRoleArn: !GetAtt DeploymentRole.Arn
-      AutoScalingGroups:
-        - !Ref WebAppASG
-      Ec2TagFilters:
-        - Key: Name
-          Value: !Sub "${AWS::StackName}-WebApp"
-          Type: KEY_AND_VALUE
 
 Outputs:
   ArtifactStoreS3Location:
