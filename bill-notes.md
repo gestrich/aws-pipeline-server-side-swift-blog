@@ -5,11 +5,15 @@ Follow READ_ME except
   Wait for completion with 'aws cloudformation wait stack-create-complete'
 pipeline.yml
   Get rid of:
-    BuildBinaryAction
-    EC2ReleaseAction
-    EC2Application
-    EC2DeploymentGroup
-
+    pipeline.vpc
+      BuildBinaryAction
+      EC2ReleaseAction
+      EC2Application
+      EC2DeploymentGroup
+    vpc.yml
+      	EC2LoadBalancer
+      	EC2LBListener
+      	Ec2LbUrl
 
 On step "Pushing the Swift application code"
   IAM -> Users -> Bill -> Security Credentials
