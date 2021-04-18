@@ -13,7 +13,9 @@ pipeline.yml
     vpc.yml
       	EC2LoadBalancer
       	EC2LBListener
+        EC2TargetGroup
       	Ec2LbUrl
+        LoadBalancerSecurityGroup
         Seems possible the items under WebAppLaunchTemplate can be removed.
 On step "Pushing the Swift application code"
   IAM -> Users -> Bill -> Security Credentials

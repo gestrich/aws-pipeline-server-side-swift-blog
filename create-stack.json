@@ -6,7 +6,7 @@
     "Parameters": [
         {
             "ParameterKey": "ECSDesiredCount",
-            "ParameterValue": "2"
+            "ParameterValue": "0"
         }
     ],
     "Tags": [

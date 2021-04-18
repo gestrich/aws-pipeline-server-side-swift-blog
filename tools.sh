@@ -9,7 +9,7 @@ function quickSetup {
   echo "cd codebuild"
   echo "AWS Console: ECR -> codebuild/swift -> Push commands"
   echo "Copy codebuild-app to another dir and cd to it"
-  echo "AWS Console: CodeBuild  -> swift-build-Pipleline-* -L Copy HTTPS url"
+  echo "AWS Console: CodeCommit  -> swift-build-Pipleline-* -> Copy HTTPS url"
   echo "git remote set-url origin <copied url>"
   echo "git push"
   echo "set ecs task count to 2"

@@ -54,7 +54,6 @@ Resources:
     Properties: 
       TemplateURL: ./pipeline.yml
       Parameters: 
-        WebAppASG: !GetAtt VPC.Outputs.WebAppASG
         ECSCluster: !GetAtt ECS.Outputs.Cluster
         ECSService: !GetAtt ECS.Outputs.Service
 
