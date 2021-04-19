@@ -88,6 +88,28 @@ Resources:
                 - 'logs:CreateLogStream'
                 - 'logs:PutLogEvents'
               Resource: '*'
+        - PolicyName: !Sub "${AWS::StackName}-DynamoDBRole"
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                - 'dynamodb:BatchGet*'
+                - 'dynamodb:DescribeStream'
+                - 'dynamodb:DescribeTable'
+                - 'dynamodb:Get*'
+                - 'dynamodb:Query'
+                - 'dynamodb:Scan'
+                - 'dynamodb:BatchWrite*'
+                - 'dynamodb:CreateTable'
+                - 'dynamodb:Delete*'
+                - 'dynamodb:Update*'
+                - 'dynamodb:PutItem'
+                - 'dynamodb:List*'
+                - 'dynamodb:DescribeReservedCapacity*'
+                - 'dynamodb:DescribeLimits'
+                - 'dynamodb:DescribeTimeToLive'
+                Effect: Allow
+                Resource: '*'
 
   TaskDefinition: 
     Type: AWS::ECS::TaskDefinition
