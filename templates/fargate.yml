@@ -92,7 +92,8 @@ Resources:
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-              - Action:
+            - Effect: Allow
+              Action:
                 - 'dynamodb:BatchGet*'
                 - 'dynamodb:DescribeStream'
                 - 'dynamodb:DescribeTable'
@@ -108,8 +109,7 @@ Resources:
                 - 'dynamodb:DescribeReservedCapacity*'
                 - 'dynamodb:DescribeLimits'
                 - 'dynamodb:DescribeTimeToLive'
-                Effect: Allow
-                Resource: '*'
+              Resource: '*'
 
   TaskDefinition: 
     Type: AWS::ECS::TaskDefinition
