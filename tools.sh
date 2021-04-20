@@ -5,15 +5,14 @@ STACK_NAME="swift-build"
 
 function quickSetup {
   echo "set ecs task count to 0"
-  echo "run ./tools createStack"
-  echo "cd codebuild"
+  echo "run ./tools.sh createStack"
+  echo "cd codebuild-image" 
   echo "AWS Console: ECR -> codebuild/swift -> Push commands"
   echo "Copy codebuild-app to another dir and cd to it"
   echo "AWS Console: CodeCommit  -> swift-build-Pipleline-* -> Copy HTTPS url"
   echo "git remote set-url origin <copied url>"
   echo "git push"
-  echo "set ecs task count to 2"
-  echo "run ./tools updateStack"
+  echo "run ./tools.sh updateStack"
 }
 
 function createStack {
