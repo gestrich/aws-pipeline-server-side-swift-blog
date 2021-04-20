@@ -39,6 +39,10 @@ function deleteStack {
   aws cloudformation wait stack-delete-complete --stack-name $STACK_NAME
 }
 
+function openSite {
+  open $(aws cloudformation describe-stacks --stack-name $STACK_NAME --query "Stacks[0].Outputs[?OutputKey=='EcsLbUrl'].OutputValue" --output text)
+}
+
 # Check if the function exists (bash specific)
 if [ $# -gt 0 ]; then
 #if declare -f "$1" > /dev/null
