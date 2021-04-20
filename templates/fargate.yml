@@ -87,6 +87,7 @@ Resources:
                 # Allow the ECS tasks to upload logs to CloudWatch
                 - 'logs:CreateLogStream'
                 - 'logs:PutLogEvents'
+                - 'logs:CreateLogGroup'
               Resource: '*'
         - PolicyName: !Sub "${AWS::StackName}-DynamoDBRole"
           PolicyDocument:
@@ -121,15 +122,31 @@ Resources:
         - "FARGATE"
       ExecutionRoleArn: !Ref ECSTaskExecutionRole
       ContainerDefinitions: 
-        - 
-          Name: "swift-app"
+        - Name: "swift-app"
           Image: !Ref Image
           Cpu: 512
           Memory: 1024
           Essential: true
           PortMappings:
-            - 
-              ContainerPort: 80
+            - ContainerPort: 80
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-create-group: 'True'
+              awslogs-group: "/ecs/ecs-cwagent-prometheus"
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: 'swift-build-prefix-'
+          #LogConfiguration:
+          #  LogDriver: awslogs
+          #  Options:
+          #    awslogs-group: !Ref CloudWatchLogsGroup
+          #    awslogs-region: !Ref AWS::Region
+
+  CloudWatchLogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Ref AWS::StackName
+      RetentionInDays: 365
 
   ECSServiceRole:
     Type: AWS::IAM::Role
