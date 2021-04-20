@@ -182,7 +182,7 @@ Resources:
       Source:
         Type: CODEPIPELINE
         BuildSpec: "buildspec.test.yml"
-      TimeoutInMinutes: 10
+      TimeoutInMinutes: 20 
 
   CodeBuildProject:
     Type: AWS::CodeBuild::Project
@@ -263,7 +263,7 @@ Resources:
       Source:
         Type: CODEPIPELINE
         BuildSpec: "buildspec.docker.yml"
-      TimeoutInMinutes: 10
+      TimeoutInMinutes: 20 
 
   ContainerBuildRole:
     Type: AWS::IAM::Role
