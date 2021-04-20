@@ -1,9 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: VPC stack for Swift build stack
-Parameters:
-  ImageId:
-    Type: AWS::EC2::Image::Id
-    Default: ami-06d51e91cea0dac8d
 
 Resources: 
   WebAppVPC:
